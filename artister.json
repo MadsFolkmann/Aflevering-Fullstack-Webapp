@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "name": "Travis Scott",
+        "birthdate": "April 30, 1992",
+        "activeSince": "2008",
+        "genres": ["Hip-Hop", "Rap", "Trap"],
+        "labels": ["Cactus Jack Records", "Epic Records"],
+        "website": "https://www.travisscott.com",
+        "image": "https://www.travisscott.com/image.jpg",
+        "shortDescription": "Travis Scott, known for his unique style and energetic performances, is a prominent figure in the world of hip-hop and rap."
+    },
+    {
+        "id": 2,
+        "name": "Adele",
+        "birthdate": "May 5, 1988",
+        "activeSince": "2006",
+        "genres": ["Pop", "Soul"],
+        "labels": ["XL Recordings", "Columbia Records"],
+        "website": "https://www.adele.com",
+        "image": "https://www.adele.com/image.jpg",
+        "shortDescription": "Adele, the soulful British singer-songwriter, known for her powerful and emotionally charged ballads."
+    },
+    {
+        "id": 3,
+        "name": "Ed Sheeran",
+        "birthdate": "February 17, 1991",
+        "activeSince": "2004",
+        "genres": ["Pop", "Folk", "Acoustic"],
+        "labels": ["Atlantic Records", "Asylum Records"],
+        "website": "https://www.edsheeran.com",
+        "image": "https://www.edsheeran.com/image.jpg",
+        "shortDescription": "Ed Sheeran, the versatile singer-songwriter, acclaimed for his melodic pop and heartfelt lyrics."
+    },
+    {
+        "id": 4,
+        "name": "Beyoncé",
+        "birthdate": "September 4, 1981",
+        "activeSince": "1997",
+        "genres": ["R&B", "Pop"],
+        "labels": ["Columbia Records", "Parkwood Entertainment"],
+        "website": "https://www.beyonce.com",
+        "image": "https://www.beyonce.com/image.jpg",
+        "shortDescription": "Beyoncé, the global icon and powerhouse performer, celebrated for her stunning vocals and empowering anthems."
+    },
+    {
+        "id": 5,
+        "name": "Bruno Mars",
+        "birthdate": "October 8, 1985",
+        "activeSince": "2004",
+        "genres": ["Pop", "R&B", "Funk"],
+        "labels": ["Atlantic Records", "Elektra Records"],
+        "website": "https://www.brunomars.com",
+        "image": "https://www.brunomars.com/image.jpg",
+        "shortDescription": "Bruno Mars, the multi-talented artist, known for his infectious grooves and dynamic stage presence."
+    },
+    {
+        "id": 6,
+        "name": "Taylor Swift",
+        "birthdate": "December 13, 1989",
+        "activeSince": "2006",
+        "genres": ["Pop", "Country"],
+        "labels": ["Republic Records", "Big Machine Label Group"],
+        "website": "https://www.taylorswift.com",
+        "image": "https://www.taylorswift.com/image.jpg",
+        "shortDescription": "Taylor Swift, the chart-topping singer-songwriter, acclaimed for her storytelling and evolving musical style."
+    },
+    {
+        "id": 7,
+        "name": "Kendrick Lamar",
+        "birthdate": "June 17, 1987",
+        "activeSince": "2003",
+        "genres": ["Hip-Hop", "Rap"],
+        "labels": ["Top Dawg Entertainment", "Aftermath Entertainment"],
+        "website": "https://www.kendricklamar.com",
+        "image": "https://www.kendricklamar.com/image.jpg",
+        "shortDescription": "Kendrick Lamar, the lyrical genius and socially conscious rapper, shaping the hip-hop landscape."
+    },
+    {
+        "id": 8,
+        "name": "Ariana Grande",
+        "birthdate": "June 26, 1993",
+        "activeSince": "2008",
+        "genres": ["Pop", "R&B"],
+        "labels": ["Republic Records"],
+        "website": "https://www.arianagrande.com",
+        "image": "https://www.arianagrande.com/image.jpg",
+        "shortDescription": "Ariana Grande, the powerhouse vocalist and pop sensation, known for her vocal range and hit songs."
+    },
+    {
+        "id": 9,
+        "name": "Coldplay",
+        "birthdate": "March 2, 1996",
+        "activeSince": "1996",
+        "genres": ["Pop", "Rock"],
+        "labels": ["Parlophone", "Atlantic Records"],
+        "website": "https://www.coldplay.com",
+        "image": "https://www.coldplay.com/image.jpg",
+        "shortDescription": "Coldplay, the globally recognized band, crafting anthemic pop-rock songs that resonate with audiences."
+    },
+    {
+        "id": 10,
+        "name": "Rihanna",
+        "birthdate": "February 20, 1988",
+        "activeSince": "2005",
+        "genres": ["R&B", "Pop", "Dancehall"],
+        "labels": ["Roc Nation", "Def Jam Recordings"],
+        "website": "https://www.rihannanow.com",
+        "image": "https://www.rihannanow.com/image.jpg",
+        "shortDescription": "Rihanna, the multi-talented artist, known for her chart-topping hits and fashion-forward style."
+    }
+]
