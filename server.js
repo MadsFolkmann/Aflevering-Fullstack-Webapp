@@ -5,3 +5,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+
+app.listen(3000, () => {
+    console.log(`serveren kører på http://localhost:3000`);
+});
