@@ -10,7 +10,7 @@ app.listen(3000, () => {
     console.log(`serveren kører på http://localhost:3000`);
 });
 
-app.get("/", async (request, response) => {
+app.get("/artists", async (request, response) => {
     const data = await fs.readFile("artister.json");
     const users = JSON.parse(data);
     response.json(users);

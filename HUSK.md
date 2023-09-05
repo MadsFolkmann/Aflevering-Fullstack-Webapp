@@ -1,0 +1,2 @@
+- Husk de fire første rest principer (står i slides)
+- Husk kommentering
