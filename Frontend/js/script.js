@@ -21,42 +21,14 @@ function initApp() {
     //Update//
     document.querySelector("#form-update-artist").addEventListener("submit", updateArtistClicked);
 
-    // //Sort - Filter//
+    // //Sort - Search//
 
-    // document.querySelector("#sort-artist").addEventListener("change", sortBy);
+    document.querySelector("#sort-artists").addEventListener("change", sortBy);
 
-    // document.querySelector("#input-search").addEventListener("keyup", inputSearchChanged);
-    // document.querySelector("#input-search").addEventListener("search", inputSearchChanged);
+    document.querySelector("#input-search").addEventListener("keyup", inputSearchChanged);
+    document.querySelector("#input-search").addEventListener("search", inputSearchChanged);
 }
 
-// ---------------------filter and Sort games-----------------------//
-// function inputSearchChanged()
-
-
-// function sortBy()
-// function inputSearchChanged(event) {
-//     const value = event.target.value;
-//     const artistsToShow = searchArtists(value);
-//     displayArtists(artistsToShow);
-// }
-
-// const searchArtists = (searchValue) => {
-//     searchValue = searchValue.toLowerCase();
-
-//     return artists.filter((artist) => artist.title.toLowerCase().includes(searchValue));
-// };
-
-// function sortBy(event) {
-//     const selectedValue = event.target.value;
-
-//     if (selectedValue === "title") {
-//         artists.sort((artist1, artist2) => artist1.title.localeCompare(artist2.title));
-//     } else if (selectedValue === "genres") {
-//         artists.sort((artist1, artist2) => artist1.title.localeCompare(artist2.title));
-//     }
-
-//     displayArtists(artists);
-// }
 // ---------------------Create game-----------------------//
 
 function showCreateModal() {
@@ -220,11 +192,6 @@ async function updateArtistClicked(event) {
     document.querySelector("#dialog-update-artist").close();
 }
 
-// updateArtist();
-
-//delete
-
-// deleteArtist();
 
 function deleteClicked(artistObject) {
     console.log("Delete button clicked");
@@ -248,6 +215,33 @@ async function deleteArtistClicked(event) {
 function deleteArtistClickedNo() {
     console.log("Close delete dialog");
     document.querySelector("#dialog-delete-artist").close();
+}
+
+// ---------------------filter and Sort games-----------------------//
+
+function inputSearchChanged(event) {
+    const value = event.target.value;
+    const artistsToShow = searchArtists(value);
+    displayArtists(artistsToShow);
+}
+
+function searchArtists(searchValue) {
+    console.log(searchValue)
+    searchValue = searchValue.toLowerCase();
+    const results = artists.filter((artist) => artist.name.toLowerCase().includes(searchValue));
+    return results
+};
+
+function sortBy(event) {
+    const selectedValue = event.target.value;
+
+    if (selectedValue === "name") {
+        artists.sort((artist1, artist2) => artist1.name.localeCompare(artist2.title));
+    } else if (selectedValue === "genres") {
+        artists.sort((artist1, artist2) => artist1.genres.localeCompare(artist2.genres));
+    }
+
+    displayArtists(artists);
 }
 
 //-------Favorite-------//
