@@ -42,24 +42,44 @@ function displayArtists(listOfArtists) {
 }
 
 function showArtists(artistObject) {
-    const html = /*html*/ `
-    <article class="grid-item">
-    <img src= "${artistObject.image}"/>
-    <div class="grid-info">
-    <h2 class="name">${artistObject.name}</h2>
-    <p>${artistObject.genres}</p>
-    </div>
-    <div class="btns">
-    <button class="btn-update">Update</button>
-    <button class="btn-delete">Delete</button>
-    </div>
-    <div>
-    <button class="btn-favorite" data-artist-id="${artistObject.id}" data-favorite="${artistObject.favorite}" >❤</button>
-    </div>
-    </article>
-  `;
+    if (artistObject.favorite === false) {
+        const html = /*html*/ `
+        <article class="grid-item">
+        <img src= "${artistObject.image}"/>
+        <div class="grid-info">
+        <h2 class="name">${artistObject.name}</h2>
+        <p>${artistObject.genres}</p>
+        </div>
+        <div class="btns">
+        <button class="btn-update">Update</button>
+        <button class="btn-delete">Delete</button>
+        </div>
+        <div>
+        <button class="btn-favorite" >❤</button>
+        </div>
+        </article>
+      `;
+      document.querySelector("#artists").insertAdjacentHTML("beforeend", html);
+    } else {
+                const html = /*html*/ `
+        <article class="grid-item">
+        <img src= "${artistObject.image}"/>
+        <div class="grid-info">
+        <h2 class="name">${artistObject.name}</h2>
+        <p>${artistObject.genres}</p>
+        </div>
+        <div class="btns">
+        <button class="btn-update">Update</button>
+        <button class="btn-delete">Delete</button>
+        </div>
+        <div>
+        <button class="btn-favorite" style="background-color:red" >❤</button>
+        </div>
+        </article>
+      `;
+                document.querySelector("#artists").insertAdjacentHTML("beforeend", html);
+    }
 
-    document.querySelector("#artists").insertAdjacentHTML("beforeend", html);
     document.querySelector("#artists article:last-child .btn-update").addEventListener("click", (event) => {
         event.stopPropagation();
         updateClicked(artistObject);
@@ -79,8 +99,6 @@ function showArtists(artistObject) {
             markAsFavorite(artistObject.id);
         }
     });
-
-    setFavoriteButtonColor(artistObject);
 
     document.querySelector("#artists article:last-child").addEventListener("click", () => artistClicked(artistObject));
 
@@ -312,51 +330,6 @@ function removeFromFavorites(artistId) {
         .catch((error) => {
             console.error("Error:", error);
         });
-}
-
-//---Favorite button update---//
-
-function updateFavoriteButton(button, artistObject) {
-  // Toggle the favorite status
-  const isFavorite = artistObject.favorite;
-  artistObject.favorite = !isFavorite;
-
-  // Update the data-favorite attribute
-  button.setAttribute("data-favorite", artistObject.favorite);
-
-  // Update the button's color based on the favorite status
-  if (artistObject.favorite) {
-    button.style.backgroundColor = "red";
-    button.style.color = "white";
-  } else {
-    button.style.backgroundColor = "white";
-    button.style.color = "black";
-  }
-
-  // Call the appropriate function (markAsFavorite or removeFromFavorites) based on the new status
-  if (artistObject.favorite) {
-    markAsFavorite(artistObject.id);
-  } else {
-    removeFromFavorites(artistObject.id);
-  }
-}
-
-function setFavoriteButtonColor(artistObject) {
-    const favoriteButton = document.querySelector(`.btn-favorite[data-artist-id="${artistObject.id}"]`);
-
-    if (artistObject.favorite) {
-        favoriteButton.style.backgroundColor = "red";
-        favoriteButton.style.color = "white";
-    } else {
-        favoriteButton.style.backgroundColor = "white";
-        favoriteButton.style.color = "black";
-    }
-
-    // Add a click event listener to the favorite button
-    favoriteButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        updateFavoriteButton(favoriteButton, artistObject);
-    });
 }
 
 //-------Refresh ved click af IGDB-------//

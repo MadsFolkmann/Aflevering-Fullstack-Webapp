@@ -160,7 +160,7 @@ main {
 }
 
 #filter-artists option {
-  color: #ffffff;
+  color: #070707;
   background-color: #1dad4f;
   border: none;
   border-radius: 50px;
@@ -312,7 +312,7 @@ cursor: pointer;
     background-color: #ffffffc8;
 }
 .favorited{
-  background-color: #fe0101c8;
+  background-color: #f00000c8;
 
 }
 
