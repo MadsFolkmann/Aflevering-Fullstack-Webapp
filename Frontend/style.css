@@ -286,7 +286,7 @@ cursor: pointer;
 }
 
 .grid-item .btn-favorite {
-  /* background-color: #ffffffc8; */
+  background-color: #ffffffc8;
   color: black;
   width: 2rem;
   height: 1.9rem;
@@ -308,13 +308,7 @@ cursor: pointer;
   box-shadow: 0 8px 16px 0 #391707a4;
 }
 
-.not-favorited{
-    background-color: #ffffffc8;
-}
-.favorited{
-  background-color: #f00000c8;
 
-}
 
 
 
