@@ -2,6 +2,5 @@
 - Husk kommentering
 - Evt status code
 - Måske lave noget response hvis artist allerede findes når man opretter
-- Lav en json fil, med id på de artister man har valgt som favorites. så read favorites igennem routes
--kan også bare proppe en fav i object listen
 -HUSK AT SKIFTE UDKOMMENTERINGS NAVNE
+-Options osv når man opretter og opdatere
