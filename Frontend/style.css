@@ -143,11 +143,35 @@ main {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
 }
+#filter-artists {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  background-color: #1dad4f;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
 
+#filter-artists option {
+  color: #ffffff;
+  background-color: #1dad4f;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
 
 
 #underHeader label,
-#sort-artists {
+#sort-artists,
+#filter-artists {
   display: inline-flex;
   align-items: center;
 }
@@ -262,7 +286,7 @@ cursor: pointer;
 }
 
 .grid-item .btn-favorite {
-  background-color: #ffffffc8;
+  /* background-color: #ffffffc8; */
   color: black;
   width: 2rem;
   height: 1.9rem;
@@ -284,7 +308,13 @@ cursor: pointer;
   box-shadow: 0 8px 16px 0 #391707a4;
 }
 
+.not-favorited{
+    background-color: #ffffffc8;
+}
+.favorited{
+  background-color: #fe0101c8;
 
+}
 
 
 

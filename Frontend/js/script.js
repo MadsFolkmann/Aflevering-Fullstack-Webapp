@@ -21,14 +21,71 @@ function initApp() {
     //Update//
     document.querySelector("#form-update-artist").addEventListener("submit", updateArtistClicked);
 
-    // //Sort - Search//
-
+    // //Sort - Search - filter//
     document.querySelector("#sort-artists").addEventListener("change", sortBy);
 
     document.querySelector("#input-search").addEventListener("keyup", inputSearchChanged);
     document.querySelector("#input-search").addEventListener("search", inputSearchChanged);
+
+    document.querySelector("#filter-artists").addEventListener("change", filterArtistsChanged);
+
 }
 
+//----------------------Games-----------------------//
+
+
+function displayArtists(listOfArtists) {
+    document.querySelector("#artists").innerHTML = "";
+    for (const artist of listOfArtists) {
+        showArtists(artist);
+    }
+}
+
+function showArtists(artistObject) {
+    const html = /*html*/ `
+    <article class="grid-item">
+    <img src= "${artistObject.image}"/>
+    <div class="grid-info">
+    <h2 class="name">${artistObject.name}</h2>
+    <p>${artistObject.genres}</p>
+    </div>
+    <div class="btns">
+    <button class="btn-update">Update</button>
+    <button class="btn-delete">Delete</button>
+    </div>
+    <div>
+    <button class="btn-favorite" data-artist-id="${artistObject.id}" data-favorite="${artistObject.favorite}" >❤</button>
+    </div>
+    </article>
+  `;
+
+    document.querySelector("#artists").insertAdjacentHTML("beforeend", html);
+    document.querySelector("#artists article:last-child .btn-update").addEventListener("click", (event) => {
+        event.stopPropagation();
+        updateClicked(artistObject);
+    });
+    document.querySelector("#artists article:last-child .btn-delete").addEventListener("click", (event) => {
+        event.stopPropagation();
+        deleteClicked(artistObject);
+    });
+    document.querySelector("#artists article:last-child .btn-favorite").addEventListener("click", (event) => {
+        event.stopPropagation();
+        // tjekker status på objektet
+        const isFavorite = artistObject.favorite;
+        // Kalder den rigtige funktion
+        if (isFavorite) {
+            removeFromFavorites(artistObject.id);
+        } else {
+            markAsFavorite(artistObject.id);
+        }
+    });
+
+    setFavoriteButtonColor(artistObject);
+
+    document.querySelector("#artists article:last-child").addEventListener("click", () => artistClicked(artistObject));
+
+ 
+}
 // ---------------------Create game-----------------------//
 
 function showCreateModal() {
@@ -74,52 +131,6 @@ async function updateGrid() {
     displayArtists(artists);
 }
 
-//----------------------Games-----------------------//
-// getArtists();
-
-// prepareArtistData();
-
-function displayArtists(listOfArtists) {
-    document.querySelector("#artists").innerHTML = "";
-    for (const artist of listOfArtists) {
-        showArtists(artist);
-    }
-}
-
-function showArtists(artistObject) {
-    const html = /*html*/ `
-    <article class="grid-item">
-    <img src= "${artistObject.image}"/>
-    <div class="grid-info">
-    <h2 class="name">${artistObject.name}</h2>
-    <p>${artistObject.genres}</p>
-    </div>
-    <div class="btns">
-    <button class="btn-update">Update</button>
-    <button class="btn-delete">Delete</button>
-    </div>
-    <div>
-    <button class="btn-favorite" >❤</button>
-    </div>
-    </article>
-  `;
-
-    document.querySelector("#artists").insertAdjacentHTML("beforeend", html);
-    document.querySelector("#artists article:last-child .btn-update").addEventListener("click", (event) => {
-        event.stopPropagation();
-        updateClicked(artistObject);
-    });
-    document.querySelector("#artists article:last-child .btn-delete").addEventListener("click", (event) => {
-        event.stopPropagation();
-        deleteClicked(artistObject);
-    });
-    document.querySelector("#artists article:last-child .btn-favorite").addEventListener("click", (event) => {
-            event.stopPropagation();
-            favoriteClicked(artistObject);
-    });
-
-    document.querySelector("#artists article:last-child").addEventListener("click", () => artistClicked(artistObject));
-}
 
 //-------------------Show Dialog----------------------//
 
@@ -239,14 +250,114 @@ function sortBy(event) {
         artists.sort((artist1, artist2) => artist1.name.localeCompare(artist2.title));
     } else if (selectedValue === "genres") {
         artists.sort((artist1, artist2) => artist1.genres.localeCompare(artist2.genres));
-    }
+    } 
 
     displayArtists(artists);
 }
 
-//-------Favorite-------//
+function filterArtistsChanged(event) {
+    const value = event.target.value;
+    console.log(value);
+    const ArtistsToShow = filterArtists(value);
+    console.log(ArtistsToShow);
+    displayArtists(ArtistsToShow);
+}
 
+function filterArtists(filterSelected) {
+    console.log(filterSelected);
+    if (filterSelected === "favorites") {
+        return artists.filter((artist) => artist.favorite === true);
+    } else {
+        return artists
+    }
+}
 
+//-----------------------Favorite----------------------//
+
+function markAsFavorite(artistId) {
+        console.log("Mark as favorite called with artistId:", artistId);
+    // Send an HTTP request to mark the artist as a favorite
+    fetch(`${endpoint}/artists/${artistId}/favorite`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ favorite: true }), // Set favorite to true
+    })
+        .then((response) => response.json())
+        .then((updatedArtists) => {
+            // Handle the response and update the UI if needed
+            console.log(updatedArtists); // You can update the UI based on the response if necessary
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+}
+
+function removeFromFavorites(artistId) {
+     console.log("Remove from favorites called with artistId:", artistId);
+    // Send an HTTP request to remove the artist from favorites
+    fetch(`${endpoint}/artists/${artistId}/favorite`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ favorite: false }), // Set favorite to false
+    })
+        .then((response) => response.json())
+        .then((updatedArtists) => {
+            // Handle the response and update the UI if needed
+            console.log(updatedArtists); // You can update the UI based on the response if necessary
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+}
+
+//---Favorite button update---//
+
+function updateFavoriteButton(button, artistObject) {
+  // Toggle the favorite status
+  const isFavorite = artistObject.favorite;
+  artistObject.favorite = !isFavorite;
+
+  // Update the data-favorite attribute
+  button.setAttribute("data-favorite", artistObject.favorite);
+
+  // Update the button's color based on the favorite status
+  if (artistObject.favorite) {
+    button.style.backgroundColor = "red";
+    button.style.color = "white";
+  } else {
+    button.style.backgroundColor = "white";
+    button.style.color = "black";
+  }
+
+  // Call the appropriate function (markAsFavorite or removeFromFavorites) based on the new status
+  if (artistObject.favorite) {
+    markAsFavorite(artistObject.id);
+  } else {
+    removeFromFavorites(artistObject.id);
+  }
+}
+
+function setFavoriteButtonColor(artistObject) {
+    const favoriteButton = document.querySelector(`.btn-favorite[data-artist-id="${artistObject.id}"]`);
+
+    if (artistObject.favorite) {
+        favoriteButton.style.backgroundColor = "red";
+        favoriteButton.style.color = "white";
+    } else {
+        favoriteButton.style.backgroundColor = "white";
+        favoriteButton.style.color = "black";
+    }
+
+    // Add a click event listener to the favorite button
+    favoriteButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        updateFavoriteButton(favoriteButton, artistObject);
+    });
+}
 
 //-------Refresh ved click af IGDB-------//
 const artistImg = document.querySelector("#artist-img");

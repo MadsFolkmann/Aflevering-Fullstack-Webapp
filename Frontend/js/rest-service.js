@@ -27,8 +27,8 @@ async function createArtist(image, name, birthdate, activeSince, genres, labels,
         genres: genres,
         labels: labels,
         website: website,
-        shortDescription: shortDescription
-        
+        shortDescription: shortDescription,
+        favorite:false
     };
     const artistAsJson = JSON.stringify(newArtist);
 

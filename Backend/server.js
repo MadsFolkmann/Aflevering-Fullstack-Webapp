@@ -43,7 +43,7 @@ app.post("/artists", async (request, response) => {
     const data = await fs.readFile("artists.json"); //Læser dataen af artist filen
     const artists = JSON.parse(data); //Konvertere det til js objekter
     artists.push(newArtist); //pusher den nye artist ind i artists listen
-    fs.writeFile("artists.json", JSON.stringify(artists)); //konvertere det tilbage til json
+    fs.writeFile("artists.json", JSON.stringify(artists, null, 2)); //konvertere det tilbage til json
     response.json(artists);//sender så artists som response
 });
 
@@ -79,6 +79,39 @@ app.delete("/artists/:id", async (request, response) => {
 
     response.json(newArtists)
 })
+
+// -------------Favorite------------//
+
+app.put("/artists/:id/favorite", async (request, response) => {
+    const id = Number(request.params.id);
+    const data = await fs.readFile("artists.json");
+    const artists = JSON.parse(data);
+
+    // Find the artist with the matching ID
+    const artistToUpdate = artists.find((artist) => artist.id === id);
+
+    if (!artistToUpdate) {
+        response.status(404).json({ message: "Artist not found" });
+    } else {
+        const body = request.body;
+
+        // Update the favorite property if provided in the request body
+        if (typeof body.favorite === "boolean") {
+            artistToUpdate.favorite = body.favorite;
+        } else {
+            response.status(400).json({ message: "Invalid request body" });
+            return;
+        }
+
+        // Write the updated data back to the JSON file
+        await fs.writeFile("artists.json", JSON.stringify(artists, null, 2));
+
+        console.log("succesfully favorited")
+        // Respond with the updated artist data
+        response.json(artistToUpdate);
+    }
+});
+
 
 
 
