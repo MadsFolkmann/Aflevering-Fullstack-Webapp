@@ -117,15 +117,18 @@ function displayArtists(listOfArtists) {
 function showArtists(artistObject) {
     const html = /*html*/ `
     <article class="grid-item">
-      <img src= "${artistObject.image}"/>
-      <div class="grid-info">
-        <h2>${artistObject.name}</h2>
-        <p>${artistObject.genres}</p>
-      </div>
-      <div class="btns">
-        <button class="btn-update">Update</button>
-        <button class="btn-delete">Delete</button>
-      </div>
+    <img src= "${artistObject.image}"/>
+    <div class="grid-info">
+    <h2 class="name">${artistObject.name}</h2>
+    <p>${artistObject.genres}</p>
+    </div>
+    <div class="btns">
+    <button class="btn-update">Update</button>
+    <button class="btn-delete">Delete</button>
+    </div>
+    <div>
+    <button class="btn-favorite" >❤</button>
+    </div>
     </article>
   `;
 
@@ -138,6 +141,11 @@ function showArtists(artistObject) {
         event.stopPropagation();
         deleteClicked(artistObject);
     });
+    document.querySelector("#artists article:last-child .btn-favorite").addEventListener("click", (event) => {
+            event.stopPropagation();
+            favoriteClicked(artistObject);
+    });
+
     document.querySelector("#artists article:last-child").addEventListener("click", () => artistClicked(artistObject));
 }
 
@@ -242,10 +250,14 @@ function deleteArtistClickedNo() {
     document.querySelector("#dialog-delete-artist").close();
 }
 
-//-------Refresh ved click af IGDB-------//
-// const igdbImg = document.querySelector("#igdb-img");
+//-------Favorite-------//
 
-// igdbImg.addEventListener("click", () => {
-//     location.reload();
-// });
+
+
+//-------Refresh ved click af IGDB-------//
+const artistImg = document.querySelector("#artist-img");
+
+artistImg.addEventListener("click", () => {
+    location.reload();
+});
 
