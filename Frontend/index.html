@@ -39,21 +39,11 @@
   <section id="artists" class="grid-container"></section>
 </main>
 
-<dialog id="dialog-show-artist" class="dialog-artist">
+<dialog id="dialog-show-artist" class="dialog-artist"="">
   <form action="" method="post" id="form-show-artist">
     <img src="billeder/favicon.ico" alt="Logo" class="logo" />
-    <section class="dialog-artist">
-      <figure><img id="artist-image" src="" /></figure>
-      <article>
-          <h3 id="artist-image"></h3>
-        <h2 id="artist-name"></h2>
-        <h3 id="artist-birthdate"></h3>
-        <h3 id="artist-activeSince"></h3>
-        <h3 id="artist-genres"></h3>
-        <h3 id="artist-labels"></h3>
-        <h3 id="artist-website"></h3>
-        <p id="artist-shortDescription"></p>
-      </article>
+    <section class="dialog-artist" id="dialog-artist-info">
+
     </section>
   </form>
   <form method="dialog">
@@ -75,10 +65,10 @@
     <input type="text" id="name" name="name" placeholder="Enter artist's name" required /><br /><br />
 
     <label for="birthdate">Birthdate:</label>
-    <input type="text" id="birthdate" name="birthdate" placeholder="Enter birthdate" required /><br /><br />
+    <input type="date" id="birthdate" name="birthdate" placeholder="Enter birthdate" required /><br /><br />
 
     <label for="activeSince">Active Since:</label>
-    <input type="text" id="activeSince" name="activeSince" placeholder="Enter active since date" required /><br /><br />
+    <input type="date" id="activeSince" name="activeSince" placeholder="Enter active since date" required /><br /><br />
 
     <label for="genres">Genres:</label>
     <input type="text" id="genres" name="genres" placeholder="Enter genres" required /><br /><br />
@@ -112,10 +102,10 @@
     <input type="text" id="update-name" name="name" placeholder="Enter updated artist's name" required /><br /><br />
 
     <label for="birthdate">Birthdate:</label>
-    <input type="text" id="update-birthdate" name="birthdate" placeholder="Enter updated birthdate" required /><br /><br />
+    <input type="date" id="update-birthdate" name="birthdate" placeholder="Enter updated birthdate" required /><br /><br />
 
     <label for="activeSince">Active Since:</label>
-    <input type="text" id="update-activeSince" name="activeSince" placeholder="Enter updated active since date" required /><br /><br />
+    <input type="date" id="update-activeSince" name="activeSince" placeholder="Enter updated active since date" required /><br /><br />
 
     <label for="genres">Genres:</label>
     <input type="text" id="update-genres" name="genres" placeholder="Enter updated genres" required /><br /><br />
