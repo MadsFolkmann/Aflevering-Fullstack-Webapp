@@ -1,6 +1,6 @@
 const endpoint = "http://localhost:3000";
 
-export { endpoint, getArtists, prepareArtistData, createArtist, updateArtist, deleteArtist };
+export { endpoint, getArtists, createArtist, updateArtist, deleteArtist };
 
 async function getArtists() {
     const response = await fetch(`${endpoint}/artists`); // fetch request, (GET)

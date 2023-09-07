@@ -140,7 +140,7 @@ async function createArtistClicked(event) {
     }
     document.querySelector("#dialog-create-artist").close();
 }
-// createArtist();
+
 
 //----------------Update Grid---------------//
 
@@ -163,7 +163,7 @@ function showDialog(artistObject) {
 
      dialogContent.innerHTML = ""; //Clear alt indhold fra før
     const html = /*html*/ `
-    <figure><img id="artist-image" src="${artistObject.image}"/></figure>
+    <figure><img id="dialog-artist-image" src="${artistObject.image}"/></figure>
       <article id="all-written-info">
         <h2 id="artist-name">${artistObject.name}</h2>
         <h3>About him:</h3><p id="artist-shortDescription">${artistObject.name} was born ${artistObject.birthdate}. ${artistObject.shortDescription}. He's been active since ${artistObject.activeSince}.</p>
