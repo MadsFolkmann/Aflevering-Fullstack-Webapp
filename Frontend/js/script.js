@@ -1,7 +1,7 @@
 "use strict"
 
 import { endpoint, getArtists, createArtist, updateArtist, deleteArtist } from "./rest-service.js";
-// import { sortBy, inputSearchChanged } from "./helpers.js";
+import { sortBy, inputSearchChanged, filterArtistsChanged } from "./helpers.js";
 
 let artists;
 endpoint;
@@ -164,7 +164,7 @@ function showDialog(artistObject) {
      dialogContent.innerHTML = ""; //Clear alt indhold fra før
     const html = /*html*/ `
     <figure><img id="artist-image" src="${artistObject.image}"/></figure>
-      <article>
+      <article id="all-written-info">
         <h2 id="artist-name">${artistObject.name}</h2>
         <h3>About him:</h3><p id="artist-shortDescription">${artistObject.name} was born ${artistObject.birthdate}. ${artistObject.shortDescription}. He's been active since ${artistObject.activeSince}.</p>
         <h3>Genres</h3><p id="artist-genres">${artistObject.genres}</p>
@@ -172,7 +172,9 @@ function showDialog(artistObject) {
          <h3>Website</h3><p id="artist-website">${artistObject.website}</p>
       </article>
     `;
-    dialogContent.insertAdjacentHTML("beforeend", html)
+    dialogContent.insertAdjacentHTML("beforeend", html);
+
+    
 }
 
 //-------------------Update and Delete----------------------//
@@ -252,91 +254,49 @@ function deleteArtistClickedNo() {
     document.querySelector("#dialog-delete-artist").close();
 }
 
-// ---------------------filter and Sort games-----------------------//
-
-function inputSearchChanged(event) {
-    const value = event.target.value;
-    const artistsToShow = searchArtists(value);
-    displayArtists(artistsToShow);
-}
-
-function searchArtists(searchValue) {
-    console.log(searchValue)
-    searchValue = searchValue.toLowerCase();
-    const results = artists.filter((artist) => artist.name.toLowerCase().includes(searchValue));
-    return results
-};
-
-function sortBy(event) {
-    const selectedValue = event.target.value;
-
-    if (selectedValue === "name") {
-        artists.sort((artist1, artist2) => artist1.name.localeCompare(artist2.name));
-    } else if (selectedValue === "genres") {
-        artists.sort((artist1, artist2) => artist1.genres.localeCompare(artist2.genres));
-    } 
-
-    displayArtists(artists);
-}
-
-function filterArtistsChanged(event) {
-    const value = event.target.value;
-    console.log(value);
-    const ArtistsToShow = filterArtists(value);
-    console.log(ArtistsToShow);
-    displayArtists(ArtistsToShow);
-}
-
-function filterArtists(filterSelected) {
-    console.log(filterSelected);
-    if (filterSelected === "favorites") {
-        return artists.filter((artist) => artist.favorite === true);
-    } else {
-        return artists
-    }
-}
 
 //-----------------------Favorite----------------------//
 
 function markAsFavorite(artistId) {
-        console.log("Mark as favorite called with artistId:", artistId);
-    // Send an HTTP request to mark the artist as a favorite
+    console.log("Markér som favorit kaldt med artistId:", artistId);
+    // Send en HTTP-anmodning for at markere artist som favorit
     fetch(`${endpoint}/artists/${artistId}/favorite`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ favorite: true }), // Set favorite to true
+        body: JSON.stringify({ favorite: true }), // Sæt favorit til true
     })
         .then((response) => response.json())
         .then((updatedArtists) => {
-            // Handle the response and update the UI if needed
-            console.log(updatedArtists); // You can update the UI based on the response if necessary
+            // Håndter svaret og opdater brugergrænsefladen om nødvendigt
+            console.log(updatedArtists);
         })
         .catch((error) => {
-            console.error("Error:", error);
+            console.error("Fejl:", error);
         });
 }
 
 function removeFromFavorites(artistId) {
-     console.log("Remove from favorites called with artistId:", artistId);
-    // Send an HTTP request to remove the artist from favorites
+    console.log("Fjern fra favoritter kaldt med artistId:", artistId);
+    // Send en HTTP-anmodning for at fjerne artist fra favoritter
     fetch(`${endpoint}/artists/${artistId}/favorite`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ favorite: false }), // Set favorite to false
+        body: JSON.stringify({ favorite: false }), // Sæt favorit til false
     })
         .then((response) => response.json())
         .then((updatedArtists) => {
-            // Handle the response and update the UI if needed
-            console.log(updatedArtists); // You can update the UI based on the response if necessary
+            // Håndter svaret og opdater brugergrænsefladen om nødvendigt
+            console.log(updatedArtists); 
         })
         .catch((error) => {
-            console.error("Error:", error);
+            console.error("Fejl:", error);
         });
 }
+
 
 //-------Refresh ved click af IGDB-------//
 const artistImg = document.querySelector("#artist-img");
@@ -345,3 +305,5 @@ artistImg.addEventListener("click", () => {
     location.reload();
 });
 
+
+export {displayArtists, artists}

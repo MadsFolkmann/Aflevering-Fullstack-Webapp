@@ -1,7 +1,0 @@
-- Husk de fire første rest principer (står i slides)
-- Husk kommentering
-- Evt status code
-- Måske lave noget response hvis artist allerede findes når man opretter
--HUSK AT SKIFTE UDKOMMENTERINGS NAVNE
--Options osv når man opretter og opdatere
-- måske vise noget validering

@@ -1,32 +1,49 @@
-const endpoint = "http://localhost:3000";
 
+import { displayArtists, artists } from "./script.js";
 
 // ---------------------filter and Sort games-----------------------//
 
 function inputSearchChanged(event) {
     const value = event.target.value;
     const artistsToShow = searchArtists(value);
-    displayArtist(artistsToShow);
+    displayArtists(artistsToShow);
 }
 
-const searchArtists = (searchValue) => {
+function searchArtists(searchValue) {
+    console.log(searchValue);
     searchValue = searchValue.toLowerCase();
-
-    return artists.filter((artist) => artist.title.toLowerCase().includes(searchValue));
-};
+    const results = artists.filter((artist) => artist.name.toLowerCase().includes(searchValue));
+    return results;
+}
 
 function sortBy(event) {
     const selectedValue = event.target.value;
 
-    if (selectedValue === "title") {
-        artists.sort((artist1, artist2) => artist1.title.localeCompare(artist2.title));
+    if (selectedValue === "name") {
+        artists.sort((artist1, artist2) => artist1.name.localeCompare(artist2.name));
     } else if (selectedValue === "genres") {
-        artists.sort((artist1, artist2) => artist1.title.localeCompare(artist2.title));
+        artists.sort((artist1, artist2) => artist1.genres.localeCompare(artist2.genres));
     }
 
-    displayArtist(artists);
+    displayArtists(artists);
+}
+
+function filterArtistsChanged(event) {
+    const value = event.target.value;
+    console.log(value);
+    const ArtistsToShow = filterArtists(value);
+    console.log(ArtistsToShow);
+    displayArtists(ArtistsToShow);
+}
+
+function filterArtists(filterSelected) {
+    console.log(filterSelected);
+    if (filterSelected === "favorites") {
+        return artists.filter((artist) => artist.favorite === true);
+    } else {
+        return artists;
+    }
 }
 
 
-
-export { endpoint, sortBy, inputSearchChanged, searchArtists };
+export { sortBy, inputSearchChanged, filterArtistsChanged };
