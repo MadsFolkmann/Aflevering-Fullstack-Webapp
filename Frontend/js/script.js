@@ -1,6 +1,6 @@
 "use strict"
 
-import { endpoint, getArtists, prepareArtistData, createArtist, updateArtist, deleteArtist } from "./rest-service.js";
+import { endpoint, getArtists, createArtist, updateArtist, deleteArtist } from "./rest-service.js";
 // import { sortBy, inputSearchChanged } from "./helpers.js";
 
 let artists;
@@ -159,27 +159,20 @@ function artistClicked(artistObject) {
 }
 
 function showDialog(artistObject) {
+    const dialogContent = document.querySelector("#dialog-artist-info");
+
+     dialogContent.innerHTML = ""; //Clear alt indhold fra før
     const html = /*html*/ `
     <figure><img id="artist-image" src="${artistObject.image}"/></figure>
       <article>
         <h2 id="artist-name">${artistObject.name}</h2>
-        <h3>About him:</h3><p id="artist-shortDescription">${artistObject.name} was born on the ${artistObject.birthdate}. ${artistObject.shortDescription}. He's been active since ${artistObject.activeSince}.</p>
+        <h3>About him:</h3><p id="artist-shortDescription">${artistObject.name} was born ${artistObject.birthdate}. ${artistObject.shortDescription}. He's been active since ${artistObject.activeSince}.</p>
         <h3>Genres</h3><p id="artist-genres">${artistObject.genres}</p>
         <h3>Labels</h3><p id="artist-labels">${artistObject.labels}</p>
          <h3>Website</h3><p id="artist-website">${artistObject.website}</p>
       </article>
     `;
-    document.querySelector("#dialog-artist-info").insertAdjacentHTML("beforeend", html)
-        // document.querySelector("#artists").insertAdjacentHTML("beforeend", html);
-
-    // document.querySelector("#artist-image").src = artistObject.image;
-    // document.querySelector("#artist-name").textContent = artistObject.name;
-    // document.querySelector("#artist-birthdate").textContent = artistObject.birthdate;
-    // document.querySelector("#artist-activeSince").textContent = artistObject.activeSince;
-    // document.querySelector("#artist-genres").textContent = artistObject.genres;
-    // document.querySelector("#artist-labels").textContent = artistObject.labels;
-    // document.querySelector("#artist-website").textContent = artistObject.website;
-    // document.querySelector("#artist-shortDescription").textContent = artistObject.shortDescription;
+    dialogContent.insertAdjacentHTML("beforeend", html)
 }
 
 //-------------------Update and Delete----------------------//
@@ -278,7 +271,7 @@ function sortBy(event) {
     const selectedValue = event.target.value;
 
     if (selectedValue === "name") {
-        artists.sort((artist1, artist2) => artist1.name.localeCompare(artist2.title));
+        artists.sort((artist1, artist2) => artist1.name.localeCompare(artist2.name));
     } else if (selectedValue === "genres") {
         artists.sort((artist1, artist2) => artist1.genres.localeCompare(artist2.genres));
     } 
